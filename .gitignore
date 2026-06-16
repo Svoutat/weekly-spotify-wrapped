@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.sqlite3
+.spotify_oauth_state
+.spotify_localhost.crt
+.spotify_localhost.key
+.spotify_openssl.cnf
+spotify_auth_url.txt
+spotify_callback_url.txt
+output/*.html
+output/*.txt
+!output/.gitkeep

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="1350" viewBox="0 0 1450 1350">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111827"/>
+    </marker>
+  </defs>
+  <rect width="1450" height="1350" fill="#ffffff"/>
+<text x="70" y="65" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#111111" text-anchor="start">Flowchart - Weekly Report Automation</text>
+  <rect x="560" y="125" width="360" height="78" rx="40" fill="#f8fafc" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="174" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#111827" text-anchor="middle">Start</text>
+  <rect x="560" y="260" width="360" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="296" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Load and validate .env</text>
+  <text x="740" y="323" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">stop if required values are missing</text>
+  <line x1="740" y1="203" x2="740" y2="260" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="560" y="395" width="360" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="431" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Create SQLite database</text>
+  <text x="740" y="458" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">if it does not exist</text>
+  <line x1="740" y1="338" x2="740" y2="395" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="560" y="530" width="360" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="566" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Fetch Last.fm scrobbles</text>
+  <text x="740" y="593" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">last 7 days</text>
+  <line x1="740" y1="473" x2="740" y2="530" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <polygon points="740,650 955,720 740,790 525,720" fill="#fff7ed" stroke="#9a3412" stroke-width="3"/>
+  <text x="740" y="714" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#111827" text-anchor="middle">Spotify enabled?</text>
+  <text x="740" y="744" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#4b5563" text-anchor="middle">client ID + secret</text>
+  <line x1="740" y1="608" x2="740" y2="650" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="1040" y="680" width="330" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="1205" y="716" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Enrich with Spotify data</text>
+  <text x="1205" y="743" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">covers, links, duration</text>
+  <line x1="955" y1="720" x2="1040" y2="720" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="995" y="700" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#4b5563" text-anchor="middle">Yes</text>
+  <rect x="560" y="850" width="360" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="886" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Save data and skip duplicates</text>
+  <text x="740" y="913" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">SQLite UNIQUE constraint</text>
+  <line x1="740" y1="790" x2="740" y2="850" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="778" y="823" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#4b5563" text-anchor="start">No or failed</text>
+  <path d="M1205 758 L1205 889 L920 889" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <polygon points="740,970 955,1040 740,1110 525,1040" fill="#fff7ed" stroke="#9a3412" stroke-width="3"/>
+  <text x="740" y="1034" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#111827" text-anchor="middle">Playlist enabled?</text>
+  <text x="740" y="1064" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#4b5563" text-anchor="middle">optional Spotify update</text>
+  <line x1="740" y1="928" x2="740" y2="970" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="1040" y="1000" width="330" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="1205" y="1036" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Update playlist</text>
+  <text x="1205" y="1063" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">errors do not stop report</text>
+  <line x1="955" y1="1040" x2="1040" y2="1040" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="560" y="1170" width="360" height="78" rx="16" fill="#f4f7fb" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="1206" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#111827" text-anchor="middle">Generate report and email</text>
+  <text x="740" y="1233" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#4b5563" text-anchor="middle">HTML output + Gmail SMTP</text>
+  <line x1="740" y1="1110" x2="740" y2="1170" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M1205 1078 L1205 1209 L920 1209" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <rect x="560" y="1300" width="360" height="78" rx="40" fill="#f8fafc" stroke="#1f2937" stroke-width="3"/>
+  <text x="740" y="1349" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#111827" text-anchor="middle">End</text>
+  <line x1="740" y1="1248" x2="740" y2="1300" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="980" viewBox="0 0 1640 980">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111827"/>
+    </marker>
+  </defs>
+  <rect width="1640" height="980" fill="#ffffff"/>
+<text x="70" y="65" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#111111" text-anchor="start">UML Class Diagram - Main Python Structures</text>
+  <rect x="75" y="135" width="330" height="285" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="75" y="135" width="330" height="46" rx="12" fill="#111827"/>
+  <text x="240" y="166" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">AppConfig</text>
+  <line x1="75" y1="181" x2="405" y2="181" stroke="#111827" stroke-width="2"/>
+  <text x="93" y="211" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">lastfm_api_key: str</text>
+  <text x="93" y="236" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">spotify_client_id: str | None</text>
+  <text x="93" y="261" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">gmail_address: str | None</text>
+  <text x="93" y="286" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">database_path: Path</text>
+  <text x="93" y="311" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">output_dir: Path</text>
+  <line x1="75" y1="346" x2="405" y2="346" stroke="#111827" stroke-width="2"/>
+  <text x="93" y="376" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">spotify_enabled: bool</text>
+  <text x="93" y="401" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">playlist_enabled: bool</text>
+  <rect x="455" y="135" width="330" height="245" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="455" y="135" width="330" height="46" rx="12" fill="#111827"/>
+  <text x="620" y="166" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">LastFmClient</text>
+  <line x1="455" y1="181" x2="785" y2="181" stroke="#111827" stroke-width="2"/>
+  <text x="473" y="211" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">api_key: str</text>
+  <text x="473" y="236" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">username: str</text>
+  <text x="473" y="261" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">session: requests.Session</text>
+  <line x1="455" y1="296" x2="785" y2="296" stroke="#111827" stroke-width="2"/>
+  <text x="473" y="326" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">get_recent_tracks()</text>
+  <text x="473" y="351" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">_request_page()</text>
+  <rect x="835" y="135" width="350" height="285" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="835" y="135" width="350" height="46" rx="12" fill="#111827"/>
+  <text x="1010" y="166" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">SpotifyClient</text>
+  <line x1="835" y1="181" x2="1185" y2="181" stroke="#111827" stroke-width="2"/>
+  <text x="853" y="211" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">client_id: str</text>
+  <text x="853" y="236" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">client_secret: str</text>
+  <text x="853" y="261" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">refresh_token: str | None</text>
+  <line x1="835" y1="296" x2="1185" y2="296" stroke="#111827" stroke-width="2"/>
+  <text x="853" y="326" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">enrich_tracks()</text>
+  <text x="853" y="351" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">search_track()</text>
+  <text x="853" y="376" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">update_playlist()</text>
+  <text x="853" y="401" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">_get_client_token()</text>
+  <rect x="1245" y="135" width="310" height="185" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="1245" y="135" width="310" height="46" rx="12" fill="#111827"/>
+  <text x="1400" y="166" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">PlaylistResult</text>
+  <line x1="1245" y1="181" x2="1555" y2="181" stroke="#111827" stroke-width="2"/>
+  <text x="1263" y="211" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">updated: bool</text>
+  <text x="1263" y="236" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">url: str | None</text>
+  <text x="1263" y="261" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">message: str</text>
+  <line x1="1245" y1="296" x2="1555" y2="296" stroke="#111827" stroke-width="2"/>
+  <rect x="75" y="520" width="350" height="285" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="75" y="520" width="350" height="46" rx="12" fill="#111827"/>
+  <text x="250" y="551" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">DatabaseManager</text>
+  <line x1="75" y1="566" x2="425" y2="566" stroke="#111827" stroke-width="2"/>
+  <text x="93" y="596" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">database_path: Path</text>
+  <line x1="75" y1="631" x2="425" y2="631" stroke="#111827" stroke-width="2"/>
+  <text x="93" y="661" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">initialize()</text>
+  <text x="93" y="686" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">save_tracks()</text>
+  <text x="93" y="711" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">fetch_tracks_between()</text>
+  <text x="93" y="736" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">count_tracks()</text>
+  <text x="93" y="761" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">_ensure_column()</text>
+  <rect x="475" y="520" width="330" height="235" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="475" y="520" width="330" height="46" rx="12" fill="#111827"/>
+  <text x="640" y="551" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">ReportGenerator</text>
+  <line x1="475" y1="566" x2="805" y2="566" stroke="#111827" stroke-width="2"/>
+  <text x="493" y="596" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">output_dir: Path</text>
+  <line x1="475" y1="631" x2="805" y2="631" stroke="#111827" stroke-width="2"/>
+  <text x="493" y="661" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">build_html_report()</text>
+  <text x="493" y="686" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">save_html_report()</text>
+  <text x="493" y="711" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">generate()</text>
+  <rect x="855" y="520" width="330" height="235" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="855" y="520" width="330" height="46" rx="12" fill="#111827"/>
+  <text x="1020" y="551" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">EmailSender</text>
+  <line x1="855" y1="566" x2="1185" y2="566" stroke="#111827" stroke-width="2"/>
+  <text x="873" y="596" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">config: AppConfig</text>
+  <text x="873" y="621" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">smtp_host: str</text>
+  <text x="873" y="646" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">smtp_port: int</text>
+  <line x1="855" y1="681" x2="1185" y2="681" stroke="#111827" stroke-width="2"/>
+  <text x="873" y="711" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">send_html_report()</text>
+  <rect x="1245" y="520" width="330" height="235" rx="12" fill="#f8fafc" stroke="#111827" stroke-width="3"/>
+  <rect x="1245" y="520" width="330" height="46" rx="12" fill="#111827"/>
+  <text x="1410" y="551" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff" text-anchor="middle">Module Functions</text>
+  <line x1="1245" y1="566" x2="1575" y2="566" stroke="#111827" stroke-width="2"/>
+  <line x1="1245" y1="606" x2="1575" y2="606" stroke="#111827" stroke-width="2"/>
+  <text x="1263" y="636" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">load_config()</text>
+  <text x="1263" y="661" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">calculate_statistics()</text>
+  <text x="1263" y="686" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">main()</text>
+  <text x="1263" y="711" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#111827" text-anchor="start">_html_to_text()</text>
+  <path d="M1185 270 L1245 236" stroke="#111827" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="1202" y="233" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#4b5563" text-anchor="start">returns</text>
+  <text x="820" y="900" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#374151" text-anchor="middle">main.py creates and coordinates the clients, database manager, report generator and email sender.</text>
+</svg>

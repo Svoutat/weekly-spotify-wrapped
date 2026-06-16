@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1100" viewBox="0 0 1900 1100">
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L11,4 L0,8 Z" fill="#111827"/>
+    </marker>
+    <marker id="greenArrow" markerWidth="11" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L11,4 L0,8 Z" fill="#047857"/>
+    </marker>
+    <style>
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 36px; font-weight: 700; fill: #111111; }
+      .subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 16px; fill: #4b5563; }
+      .group-title { font-family: Arial, Helvetica, sans-serif; font-size: 27px; font-weight: 700; fill: #111827; }
+      .box-title { font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+      .box-text { font-family: Arial, Helvetica, sans-serif; font-size: 15px; fill: #374151; }
+      .small { font-family: Arial, Helvetica, sans-serif; font-size: 13px; fill: #4b5563; }
+      .tiny { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #6b7280; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 700; fill: #374151; }
+      .line { fill: none; stroke: #111827; stroke-width: 3; marker-end: url(#arrow); }
+      .thin { fill: none; stroke: #374151; stroke-width: 2.2; marker-end: url(#arrow); }
+      .green-line { fill: none; stroke: #047857; stroke-width: 3; marker-end: url(#greenArrow); }
+      .dash { fill: none; stroke: #6b7280; stroke-width: 2.2; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1900" height="1100" fill="#ffffff"/>
+  <text x="70" y="66" class="title">System Architecture Diagram - Weekly Spotify Wrapped</text>
+  <text x="70" y="96" class="subtitle">Combined component and deployment view for the M122E automation script</text>
+
+  <!-- Actor and trigger -->
+  <circle cx="85" cy="260" r="18" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+  <line x1="85" y1="278" x2="85" y2="340" stroke="#111827" stroke-width="2"/>
+  <line x1="47" y1="305" x2="123" y2="305" stroke="#111827" stroke-width="2"/>
+  <line x1="85" y1="340" x2="48" y2="388" stroke="#111827" stroke-width="2"/>
+  <line x1="85" y1="340" x2="122" y2="388" stroke="#111827" stroke-width="2"/>
+  <text x="85" y="428" class="box-title" text-anchor="middle">User</text>
+  <text x="85" y="454" class="small" text-anchor="middle">runs manually</text>
+  <text x="85" y="474" class="small" text-anchor="middle">or weekly</text>
+
+  <rect x="165" y="215" width="280" height="122" rx="14" fill="#e0f2fe" stroke="#0369a1" stroke-width="3"/>
+  <text x="305" y="250" class="box-title" text-anchor="middle">PowerShell /</text>
+  <text x="305" y="276" class="box-title" text-anchor="middle">Task Scheduler</text>
+  <text x="305" y="304" class="box-text" text-anchor="middle">starts Python automation</text>
+  <text x="305" y="325" class="tiny" text-anchor="middle">python main.py</text>
+
+  <path d="M126 303 L160 277" class="line"/>
+  <text x="135" y="276" class="label">start</text>
+
+  <!-- Local computer boundary -->
+  <rect x="490" y="135" width="870" height="850" rx="26" fill="#f8fafc" stroke="#1f2937" stroke-width="4"/>
+  <text x="925" y="180" class="group-title" text-anchor="middle">Local Windows Computer</text>
+  <text x="925" y="207" class="subtitle" text-anchor="middle">project folder, virtual environment, configuration, database and output files</text>
+
+  <rect x="540" y="245" width="760" height="125" rx="18" fill="#eef2ff" stroke="#4f46e5" stroke-width="3"/>
+  <text x="920" y="285" class="box-title" text-anchor="middle">Python Runtime / Virtual Environment</text>
+  <text x="920" y="314" class="box-text" text-anchor="middle">installed dependencies from requirements.txt</text>
+  <text x="920" y="339" class="tiny" text-anchor="middle">requests, python-dotenv, pytest</text>
+
+  <path d="M445 276 L535 307" class="line"/>
+  <text x="458" y="263" class="label">executes</text>
+
+  <!-- Python modules -->
+  <rect x="720" y="412" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="835" y="450" class="box-title" text-anchor="middle">main.py</text>
+  <text x="835" y="478" class="box-text" text-anchor="middle">orchestrates workflow</text>
+
+  <rect x="555" y="555" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="670" y="593" class="box-title" text-anchor="middle">config.py</text>
+  <text x="670" y="621" class="box-text" text-anchor="middle">loads .env values</text>
+
+  <rect x="825" y="555" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="940" y="593" class="box-title" text-anchor="middle">lastfm_client.py</text>
+  <text x="940" y="621" class="box-text" text-anchor="middle">loads scrobbles</text>
+
+  <rect x="1095" y="555" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="1210" y="593" class="box-title" text-anchor="middle">spotify_client.py</text>
+  <text x="1210" y="621" class="box-text" text-anchor="middle">metadata + playlist</text>
+
+  <rect x="555" y="715" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="670" y="753" class="box-title" text-anchor="middle">database.py</text>
+  <text x="670" y="781" class="box-text" text-anchor="middle">SQLite storage</text>
+
+  <rect x="825" y="715" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="940" y="753" class="box-title" text-anchor="middle">report_generator.py</text>
+  <text x="940" y="781" class="box-text" text-anchor="middle">statistics + HTML</text>
+
+  <rect x="1095" y="715" width="230" height="96" rx="14" fill="#ffffff" stroke="#1f2937" stroke-width="3"/>
+  <text x="1210" y="753" class="box-title" text-anchor="middle">email_sender.py</text>
+  <text x="1210" y="781" class="box-text" text-anchor="middle">Gmail SMTP delivery</text>
+
+  <rect x="1095" y="870" width="230" height="78" rx="14" fill="#fefce8" stroke="#a16207" stroke-width="3"/>
+  <text x="1210" y="902" class="box-title" text-anchor="middle">spotify_setup.py</text>
+  <text x="1210" y="929" class="box-text" text-anchor="middle">OAuth setup helper</text>
+
+  <!-- Orchestration arrows inside runtime -->
+  <path d="M835 508 L835 535 L670 535 L670 550" class="thin"/>
+  <path d="M835 508 L835 535 L940 535 L940 550" class="thin"/>
+  <path d="M835 508 L835 535 L1210 535 L1210 550" class="thin"/>
+  <path d="M835 508 L835 690 L670 690 L670 710" class="thin"/>
+  <path d="M835 508 L835 690 L940 690 L940 710" class="thin"/>
+  <path d="M835 508 L835 690 L1210 690 L1210 710" class="thin"/>
+
+  <!-- Local files -->
+  <rect x="575" y="870" width="235" height="78" rx="14" fill="#fff7ed" stroke="#c2410c" stroke-width="3"/>
+  <text x="692" y="902" class="box-title" text-anchor="middle">.env</text>
+  <text x="692" y="929" class="box-text" text-anchor="middle">API keys and settings</text>
+
+  <rect x="835" y="870" width="235" height="78" rx="14" fill="#fff7ed" stroke="#c2410c" stroke-width="3"/>
+  <text x="952" y="902" class="box-title" text-anchor="middle">output/</text>
+  <text x="952" y="929" class="box-text" text-anchor="middle">HTML weekly report</text>
+
+  <path d="M555 603 L520 603 L520 909 L570 909" class="dash"/>
+  <text x="530" y="745" class="label">reads</text>
+  <path d="M940 811 L952 865" class="dash"/>
+  <text x="962" y="850" class="label">writes</text>
+  <path d="M1095 930 L1080 965 L810 965 L810 925" class="dash"/>
+  <text x="900" y="982" class="label">stores token values</text>
+
+  <!-- External services -->
+  <rect x="1445" y="245" width="335" height="115" rx="16" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+  <text x="1612" y="288" class="box-title" text-anchor="middle">Last.fm API</text>
+  <text x="1612" y="318" class="box-text" text-anchor="middle">weekly listening history</text>
+  <text x="1612" y="341" class="tiny" text-anchor="middle">artist, song, album, timestamp</text>
+
+  <rect x="1445" y="435" width="335" height="125" rx="16" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+  <text x="1612" y="476" class="box-title" text-anchor="middle">Spotify Web API</text>
+  <text x="1612" y="506" class="box-text" text-anchor="middle">track metadata and covers</text>
+  <text x="1612" y="531" class="tiny" text-anchor="middle">OAuth + optional playlist update</text>
+
+  <rect x="1445" y="630" width="335" height="115" rx="16" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+  <text x="1612" y="673" class="box-title" text-anchor="middle">Gmail SMTP</text>
+  <text x="1612" y="704" class="box-text" text-anchor="middle">secure email delivery</text>
+  <text x="1612" y="727" class="tiny" text-anchor="middle">SMTP SSL</text>
+
+  <rect x="1445" y="815" width="335" height="105" rx="16" fill="#eff6ff" stroke="#2563eb" stroke-width="3"/>
+  <text x="1612" y="858" class="box-title" text-anchor="middle">Email Recipient</text>
+  <text x="1612" y="889" class="box-text" text-anchor="middle">receives weekly report</text>
+
+  <rect x="175" y="670" width="250" height="112" rx="14" fill="#fef3c7" stroke="#a16207" stroke-width="3"/>
+  <text x="300" y="708" class="box-title" text-anchor="middle">SQLite Database</text>
+  <text x="300" y="737" class="box-text" text-anchor="middle">track_plays history</text>
+  <text x="300" y="760" class="tiny" text-anchor="middle">duplicates prevented</text>
+
+  <!-- External arrows -->
+  <path d="M1055 603 C1195 530 1295 330 1440 304" class="green-line"/>
+  <text x="1220" y="390" class="label">HTTPS recent tracks</text>
+
+  <path d="M1325 603 C1390 570 1405 520 1440 500" class="green-line"/>
+  <text x="1365" y="545" class="label">HTTPS metadata</text>
+
+  <path d="M1325 909 C1385 900 1405 530 1440 500" class="green-line"/>
+  <text x="1360" y="855" class="label">OAuth setup</text>
+
+  <path d="M670 763 C555 763 530 730 430 730" class="line"/>
+  <text x="480" y="704" class="label">SQL read/write</text>
+
+  <path d="M1325 763 C1395 750 1405 692 1440 690" class="green-line"/>
+  <text x="1360" y="728" class="label">SMTP SSL</text>
+
+  <path d="M1612 745 L1612 810" class="green-line"/>
+  <text x="1632" y="786" class="label">delivers</text>
+
+  <!-- Data flow summary -->
+  <rect x="175" y="840" width="250" height="112" rx="14" fill="#f3f4f6" stroke="#4b5563" stroke-width="3"/>
+  <text x="300" y="878" class="box-title" text-anchor="middle">Report Result</text>
+  <text x="300" y="907" class="box-text" text-anchor="middle">top songs, artists, hours</text>
+  <text x="300" y="930" class="tiny" text-anchor="middle">current vs. previous week</text>
+
+  <path d="M835 948 L835 968 L430 968 L430 900 L425 900" class="line"/>
+  <text x="555" y="962" class="label">statistics and comparison</text>
+
+  <!-- Notes -->
+  <rect x="70" y="1024" width="1740" height="50" rx="12" fill="#f8fafc" stroke="#d1d5db" stroke-width="2"/>
+  <text x="940" y="1056" class="subtitle" text-anchor="middle">
+    Secrets stay in .env and generated runtime files (.sqlite3, output HTML) are excluded from Git/submission through .gitignore.
+  </text>
+</svg>
