@@ -41,6 +41,7 @@ weekly-spotify-wrapped/
 |   |-- M122E_Project_Plan_Spotify_Wrapped.pdf
 |   |-- ProjectProposalM122E.docx
 |   |-- ProjectProposalM122E.pdf
+|   |-- assets/
 |   |-- diagrams/
 |-- output/
 ```
@@ -195,6 +196,7 @@ Additional evidence:
 - `docs/M122E_Test_Protocol.pdf`
 - `docs/M122E_Project_Plan_Spotify_Wrapped.pdf`
 - `docs/ProjectProposalM122E.pdf`
+- `docs/assets/`
 - `docs/diagrams/`
 
 ## 10. Submission Notes
