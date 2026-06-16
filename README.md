@@ -47,7 +47,7 @@ spotify_weekly_wrapped/
 Clone the repository or open PowerShell in the project folder:
 
 ```powershell
-git clone <repository-url>
+git clone https://github.com/Svoutat/weekly-spotify-wrapped.git
 cd spotify_weekly_wrapped
 ```
 

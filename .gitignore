@@ -3,6 +3,8 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+~$*.docx
+~$*.xlsx
 *.sqlite3
 .spotify_oauth_state
 .spotify_localhost.crt
