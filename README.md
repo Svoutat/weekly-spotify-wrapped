@@ -55,10 +55,10 @@ git clone https://github.com/Svoutat/weekly-spotify-wrapped.git
 cd weekly-spotify-wrapped
 ```
 
-If the project is already stored locally, open PowerShell in this folder instead:
+If the project is already stored locally, open PowerShell in the existing project folder instead:
 
 ```powershell
-cd C:\Users\voutats1\Documents\Gibz\Informatik\M122\M122ESpotifyProject\spotify_weekly_wrapped
+cd <project-path>
 ```
 
 ### 3.2 Create The Virtual Environment
@@ -155,7 +155,7 @@ Use Windows Task Scheduler for weekly automatic execution.
 Program:
 
 ```text
-C:\Users\voutats1\Documents\Gibz\Informatik\M122\M122ESpotifyProject\spotify_weekly_wrapped\.venv\Scripts\python.exe
+<project-path>\.venv\Scripts\python.exe
 ```
 
 Arguments:
@@ -167,8 +167,10 @@ main.py
 Start in:
 
 ```text
-C:\Users\voutats1\Documents\Gibz\Informatik\M122\M122ESpotifyProject\spotify_weekly_wrapped
+<project-path>
 ```
+
+Replace `<project-path>` with the folder where the repository was cloned.
 
 ## 8. Tests
 
