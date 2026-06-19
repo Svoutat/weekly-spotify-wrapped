@@ -78,6 +78,61 @@ def test_enrich_track_adds_spotify_metadata_and_artist_image() -> None:
     assert session.posts[0][1]["data"]["grant_type"] == "client_credentials"
 
 
+def test_enrich_tracks_reuses_cached_metadata_for_duplicate_tracks() -> None:
+    session = EnrichmentSession()
+    client = SpotifyClient("client-id", "client-secret", session=session)
+
+    enriched = client.enrich_tracks(
+        [
+            {"track_name": "Song A", "artist_name": "Artist A", "played_at": "first"},
+            {"track_name": "Song A", "artist_name": "Artist A", "played_at": "second"},
+        ]
+    )
+
+    search_calls = [call for call in session.gets if call[0].endswith("/search")]
+    artist_calls = [call for call in session.gets if call[0].endswith("/artists/artist-1")]
+    assert len(search_calls) == 1
+    assert len(artist_calls) == 1
+    assert enriched[0]["spotify_track_id"] == "track-1"
+    assert enriched[1]["spotify_track_id"] == "track-1"
+    assert enriched[1]["played_at"] == "second"
+
+
+class RateLimitSession:
+    def __init__(self):
+        self.posts = []
+        self.gets = []
+
+    def post(self, url: str, **kwargs):
+        self.posts.append((url, kwargs))
+        return FakeResponse({"access_token": "client-token", "expires_in": 3600})
+
+    def get(self, url: str, **kwargs):
+        self.gets.append((url, kwargs))
+        return FakeResponse(
+            {"error": {"message": "Too many requests"}},
+            status_code=429,
+            text='{"error":{"message":"Too many requests"}}',
+            headers={"Retry-After": "0"},
+        )
+
+
+def test_enrich_tracks_stops_after_spotify_rate_limit() -> None:
+    session = RateLimitSession()
+    client = SpotifyClient("client-id", "client-secret", session=session)
+
+    tracks = [
+        {"track_name": "Song A", "artist_name": "Artist A"},
+        {"track_name": "Song B", "artist_name": "Artist B"},
+        {"track_name": "Song C", "artist_name": "Artist C"},
+    ]
+
+    enriched = client.enrich_tracks(tracks)
+
+    assert enriched == tracks
+    assert len(session.gets) == 2
+
+
 class FallbackSearchSession(EnrichmentSession):
     def get(self, url: str, **kwargs):
         self.gets.append((url, kwargs))

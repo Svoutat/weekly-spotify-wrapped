@@ -42,31 +42,47 @@ class SpotifyClient:
         self._client_token: str | None = None
         self._client_token_expires_at = datetime.min.replace(tzinfo=timezone.utc)
         self._artist_cache: dict[str, dict[str, Any] | None] = {}
+        self._track_cache: dict[tuple[str, str], dict[str, Any] | None] = {}
+        self._skip_enrichment = False
 
     def enrich_tracks(self, tracks: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
         enriched_tracks: list[dict[str, Any]] = []
         for track in tracks:
+            if self._skip_enrichment:
+                enriched_tracks.append(dict(track))
+                continue
             try:
                 enriched_tracks.append(self.enrich_track(track))
             except SpotifyError as exc:
-                LOGGER.warning(
-                    "Spotify enrichment skipped for '%s' by '%s': %s",
-                    track.get("track_name"),
-                    track.get("artist_name"),
-                    exc,
-                )
+                if _should_stop_enrichment(exc):
+                    LOGGER.warning(
+                        "Spotify enrichment stopped for this run: %s. "
+                        "Continuing with Last.fm data only.",
+                        exc,
+                    )
+                    self._skip_enrichment = True
+                else:
+                    LOGGER.warning(
+                        "Spotify enrichment skipped for '%s' by '%s': %s",
+                        track.get("track_name"),
+                        track.get("artist_name"),
+                        exc,
+                    )
                 enriched_tracks.append(dict(track))
         return enriched_tracks
 
     def enrich_track(self, track: dict[str, Any]) -> dict[str, Any]:
-        result = self.search_track(
-            track_name=str(track.get("track_name", "")),
-            artist_name=str(track.get("artist_name", "")),
-        )
+        track_name = str(track.get("track_name", ""))
+        artist_name = str(track.get("artist_name", ""))
+        cache_key = _track_cache_key(track_name, artist_name)
+        if cache_key in self._track_cache:
+            return _apply_metadata(track, self._track_cache[cache_key])
+
+        result = self.search_track(track_name=track_name, artist_name=artist_name)
         if result is None:
+            self._track_cache[cache_key] = None
             return dict(track)
 
-        enriched = dict(track)
         album = result.get("album", {}) or {}
         images = album.get("images", []) or []
         external_urls = result.get("external_urls", {}) or {}
@@ -74,18 +90,17 @@ class SpotifyClient:
         artist_id = artist.get("id") if artist else None
         artist_image_url = self._artist_image_url(artist_id) if artist_id else None
 
-        enriched.update(
-            {
-                "spotify_track_id": result.get("id"),
-                "spotify_track_url": external_urls.get("spotify"),
-                "spotify_duration_ms": result.get("duration_ms"),
-                "spotify_album_name": album.get("name"),
-                "spotify_cover_url": images[0].get("url") if images else None,
-                "spotify_artist_id": artist_id,
-                "spotify_artist_image_url": artist_image_url,
-            }
-        )
-        return enriched
+        metadata = {
+            "spotify_track_id": result.get("id"),
+            "spotify_track_url": external_urls.get("spotify"),
+            "spotify_duration_ms": result.get("duration_ms"),
+            "spotify_album_name": album.get("name"),
+            "spotify_cover_url": images[0].get("url") if images else None,
+            "spotify_artist_id": artist_id,
+            "spotify_artist_image_url": artist_image_url,
+        }
+        self._track_cache[cache_key] = metadata
+        return _apply_metadata(track, metadata)
 
     def search_track(self, track_name: str, artist_name: str) -> dict[str, Any] | None:
         token = self._get_client_token()
@@ -254,3 +269,23 @@ def _first_artist(track_payload: dict[str, Any]) -> dict[str, Any] | None:
     if artists and isinstance(artists[0], dict):
         return artists[0]
     return None
+
+
+def _track_cache_key(track_name: str, artist_name: str) -> tuple[str, str]:
+    return (track_name.strip().casefold(), artist_name.strip().casefold())
+
+
+def _apply_metadata(track: dict[str, Any], metadata: dict[str, Any] | None) -> dict[str, Any]:
+    enriched = dict(track)
+    if metadata:
+        enriched.update(metadata)
+    return enriched
+
+
+def _should_stop_enrichment(error: SpotifyError) -> bool:
+    message = str(error).lower()
+    return (
+        "http 429" in message
+        or "too many requests" in message
+        or "could not authenticate with spotify" in message
+    )

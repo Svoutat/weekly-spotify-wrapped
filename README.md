@@ -181,7 +181,7 @@ python -m pytest
 Latest verified result:
 
 ```text
-35 passed
+37 passed
 ```
 
 ## 9. Documentation
