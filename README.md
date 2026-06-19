@@ -21,6 +21,9 @@ Weekly Spotify Wrapped creates a personal weekly music report from Last.fm liste
 
 ```text
 weekly-spotify-wrapped/
+|-- .github/
+|   |-- workflows/
+|       |-- ci.yml
 |-- main.py
 |-- config.py
 |-- database.py
@@ -115,6 +118,10 @@ The Last.fm API secret is not needed because the program only reads recent publi
 
 ### 5.2 Spotify
 
+Spotify is recommended for covers, artist images, durations and Spotify links. According to Spotify's Web API Getting Started page, a Spotify Premium account can be required to use the Web API. If the teacher does not have Spotify Premium or does not want to create a Spotify app, the project can still be tested without Spotify by leaving the Spotify values empty and setting `ENABLE_PLAYLIST=false`.
+
+With Spotify Premium or a working Spotify Developer account:
+
 1. Open `https://developer.spotify.com/dashboard`.
 2. Log in with a Spotify account.
 3. Click **Create app**.
@@ -134,6 +141,19 @@ python spotify_setup.py
 ```
 
 The setup helper opens a Spotify login URL. After login, Spotify redirects to the local callback URL. The helper then saves the generated values for `SPOTIFY_REFRESH_TOKEN`, `SPOTIFY_PLAYLIST_ID` and `PLAYLIST_URL` in `.env`.
+
+Alternative without Spotify Premium:
+
+```env
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+SPOTIFY_PLAYLIST_ID=
+PLAYLIST_URL=
+ENABLE_PLAYLIST=false
+```
+
+In this mode, the program uses Last.fm data only. The database, statistics, HTML report, tests and optional email sending still work. Album covers, Spotify links, Spotify durations and playlist updates are simply skipped.
 
 If Spotify playlist updates return HTTP 403, set `ENABLE_PLAYLIST=false`. The report still works without playlist updates. This is the recommended setting for a simple teacher test when playlist permissions are not needed.
 
@@ -212,7 +232,20 @@ Latest verified result:
 37 passed
 ```
 
-## 9. Documentation
+## 9. CI/CD Pipeline
+
+The repository includes a GitHub Actions workflow in `.github/workflows/ci.yml`.
+
+The pipeline runs automatically on pushes and pull requests to `main`:
+
+1. Check out the repository.
+2. Set up Python 3.12.
+3. Install dependencies from `requirements.txt`.
+4. Run `python -m pytest`.
+
+This is a CI pipeline for the school project. There is no real production deployment, so the CD part is limited to keeping the repository in an automatically tested, submission-ready state.
+
+## 10. Documentation
 
 The main documentation is in `docs/`.
 
@@ -229,7 +262,7 @@ Additional evidence:
 - `docs/assets/`
 - `docs/diagrams/`
 
-## 10. Submission Notes
+## 11. Submission Notes
 
 Submit the GitHub repository link:
 
