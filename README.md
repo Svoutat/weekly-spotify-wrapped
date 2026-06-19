@@ -90,10 +90,10 @@ Fill the values in `.env`. Never commit the real `.env` file.
 | `SPOTIFY_PLAYLIST_ID` | Optional | Existing or generated Spotify playlist ID. |
 | `PLAYLIST_URL` | Optional | Link to the generated playlist. |
 | `ENABLE_PLAYLIST` | Optional | Set to `true` only if playlist permissions work. |
-| `GMAIL_ADDRESS` | If email enabled | Gmail sender address. |
-| `GMAIL_APP_PASSWORD` | If email enabled | Google app password, not the normal Gmail password. |
-| `RECIPIENT_EMAIL` | If email enabled | Email address that receives the report. |
-| `SEND_EMAIL` | No | `true` sends email, `false` only creates the HTML report. |
+| `GMAIL_ADDRESS` | Only if email is enabled | Gmail sender address. Leave empty when `SEND_EMAIL=false`. |
+| `GMAIL_APP_PASSWORD` | Only if email is enabled | Google app password, not the normal Gmail password. Leave empty when `SEND_EMAIL=false`. |
+| `RECIPIENT_EMAIL` | Only if email is enabled | Email address that receives the report. Leave empty when `SEND_EMAIL=false`. |
+| `SEND_EMAIL` | No | `true` sends email, `false` only creates the HTML report. Email setup is optional. |
 | `LOOKBACK_DAYS` | No | Default is `7`. |
 | `DATABASE_PATH` | No | Default is `spotify_wrapped.sqlite3`. |
 | `OUTPUT_DIR` | No | Default is `output`. |
@@ -103,32 +103,60 @@ Fill the values in `.env`. Never commit the real `.env` file.
 ### 5.1 Last.fm
 
 1. Open `https://www.last.fm/api/account/create`.
-2. Create an API application.
-3. Copy the API key into `LASTFM_API_KEY`.
-4. Add your Last.fm username to `LASTFM_USERNAME`.
+2. Log in with a Last.fm account.
+3. Create an API application.
+4. Use a clear application name, for example `Weekly Spotify Wrapped`.
+5. Use a short description such as `Weekly listening report for a school automation project`.
+6. The callback URL and homepage are not needed for this project. If Last.fm asks for a URL, a placeholder such as `http://localhost` can be used.
+7. Copy the generated API key into `LASTFM_API_KEY`.
+8. Add the Last.fm username whose scrobbles should be loaded to `LASTFM_USERNAME`.
 
 The Last.fm API secret is not needed because the program only reads recent public scrobbles.
 
 ### 5.2 Spotify
 
 1. Open `https://developer.spotify.com/dashboard`.
-2. Create a Spotify app.
-3. Add `http://127.0.0.1:8888/callback` as redirect URI.
-4. Copy the client ID and client secret into `.env`.
-5. Run the setup helper if playlist updates should be used:
+2. Log in with a Spotify account.
+3. Click **Create app**.
+4. Use an app name such as `Weekly Spotify Wrapped`.
+5. Use a description such as `Weekly music report using Spotify metadata`.
+6. Enter `http://127.0.0.1:8888/callback` as redirect URI. This must match `SPOTIFY_REDIRECT_URI` in `.env`.
+7. Select **Web API** as the API or SDK.
+8. Accept the Spotify developer terms and create the app.
+9. Open the app settings.
+10. Copy the client ID into `SPOTIFY_CLIENT_ID`.
+11. Click **View client secret** and copy it into `SPOTIFY_CLIENT_SECRET`.
+12. Spotify metadata enrichment works with only client ID and client secret. The report can run without playlist permissions.
+13. Run the setup helper only if playlist updates should be used:
 
 ```powershell
 python spotify_setup.py
 ```
 
-If Spotify playlist updates return HTTP 403, set `ENABLE_PLAYLIST=false`. The report still works without playlist updates.
+The setup helper opens a Spotify login URL. After login, Spotify redirects to the local callback URL. The helper then saves the generated values for `SPOTIFY_REFRESH_TOKEN`, `SPOTIFY_PLAYLIST_ID` and `PLAYLIST_URL` in `.env`.
+
+If Spotify playlist updates return HTTP 403, set `ENABLE_PLAYLIST=false`. The report still works without playlist updates. This is the recommended setting for a simple teacher test when playlist permissions are not needed.
 
 ### 5.3 Gmail
 
-1. Enable 2-Step Verification in the Google account.
-2. Open `https://myaccount.google.com/apppasswords`.
-3. Create an app password.
-4. Put the generated app password into `GMAIL_APP_PASSWORD`.
+Email sending is optional. If the teacher only wants to test report generation, use:
+
+```env
+SEND_EMAIL=false
+```
+
+With this setting, `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD` and `RECIPIENT_EMAIL` can stay empty. The program still creates the HTML report in `output/`.
+
+To test email delivery:
+
+1. Use a Gmail account as the sender.
+2. Enable 2-Step Verification in the Google account.
+3. Open `https://myaccount.google.com/apppasswords`.
+4. Create an app password for this project.
+5. Put the Gmail address into `GMAIL_ADDRESS`.
+6. Put the generated app password into `GMAIL_APP_PASSWORD`.
+7. Put the receiver email address into `RECIPIENT_EMAIL`.
+8. Set `SEND_EMAIL=true`.
 
 Use the app password, not the normal Gmail password.
 
