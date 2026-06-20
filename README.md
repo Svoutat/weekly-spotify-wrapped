@@ -180,6 +180,26 @@ To test email delivery:
 
 Use the app password, not the normal Gmail password.
 
+### 5.4 Running Without Spotify Or Email
+
+The program can also run without Spotify and without email sending.
+
+This works because Last.fm is the required data source. Spotify is only used to enrich the report with covers, durations, links and optional playlist updates. Gmail is only used to send the finished HTML report by email. If these optional services are disabled, the script still loads Last.fm tracks, stores them in SQLite, calculates statistics and creates the HTML report in `output/`.
+
+For a simple teacher test, these values are enough:
+
+```env
+SEND_EMAIL=false
+ENABLE_PLAYLIST=false
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+SPOTIFY_PLAYLIST_ID=
+PLAYLIST_URL=
+```
+
+With this setup, no Gmail account and no Spotify app are required. Only `LASTFM_API_KEY` and `LASTFM_USERNAME` are required.
+
 ## 6. Run The Program
 
 ```powershell
